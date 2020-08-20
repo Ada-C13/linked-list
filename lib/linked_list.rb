@@ -3,10 +3,12 @@
 class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
+  attr_accessor :previous 
 
-  def initialize(value, next_node = nil)
+  def initialize(value, next_node = nil, previous = nil )
     @data = value
     @next = next_node
+    @previous = previous
   end
 end
 
@@ -14,28 +16,58 @@ end
 class LinkedList
     def initialize
       @head = nil # keep the head private. Not accessible outside this class
+      @tail = nil 
     end
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_first(value)
-      raise NotImplementedError
+      if @head.nil? 
+        @head = @tail = Node.new(value)
+      else
+        new_node = Node.new(value,@head)
+        @head.previous = new_node 
+        @head = new_node  
+      end 
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def search(value)
-      raise NotImplementedError
+      return false if @head.nil? 
+      pointer = @head 
+ 
+      until pointer.next.nil?
+       
+        if pointer.data == value || pointer.next.data == value 
+          return true 
+        else  
+          pointer = pointer.next 
+        end 
+
+      end 
+
+      return false 
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return nil if @head.nil? 
+      max = @head.data
+      pointer = @head
+      while !pointer.next.nil? 
+        if pointer.data > max 
+          max = pointer.data 
+        end 
+        pointer = pointer.next 
+      end 
+      return @tail.data if @tail.data > max 
+      return max 
     end
 
     # method to return the min value in the linked list
@@ -43,7 +75,21 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_min
-      raise NotImplementedError
+      return nil if @head.nil? 
+
+      min = @head.data
+   
+      pointer = @head
+      while !pointer.next.nil? 
+        if pointer.data < min 
+          min = pointer.data 
+        elsif pointer.tail < min 
+          min = pointer.tail 
+        end 
+        pointer = pointer.next 
+      end 
+     
+      return min 
     end
 
 
