@@ -21,7 +21,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe 'add_first & get_first' do
+    describe 'add_first & get_first' do
         it 'can add values to an empty list' do
             # Act
             @list.add_first(3)
@@ -74,7 +74,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "length" do
+    describe "length" do
         it "will return 0 for an empty list" do
             expect(@list.length).must_equal 0
         end
@@ -89,7 +89,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "addLast & getLast" do
+    describe "addLast & getLast" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_first).must_equal 1
@@ -112,7 +112,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe 'get_at_index' do
+    describe 'get_at_index' do
         it 'returns nil if the index is outside the bounds of the list' do
             expect(@list.get_at_index(3)).must_be_nil
         end
@@ -130,7 +130,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe 'max and min values' do
+    describe 'max and min values' do
         it 'returns nil if the list is empty' do
             expect(@list.find_max()).must_be_nil
             expect(@list.find_min()).must_be_nil
@@ -152,7 +152,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "delete" do
+    describe "delete" do
         it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
