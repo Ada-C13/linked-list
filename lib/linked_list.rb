@@ -18,34 +18,83 @@ class LinkedList
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_first(value)
-      raise NotImplementedError
+      if @head.nil?
+        # create new node with the value and set it as the head of the Linked List
+        @head = Node.new(value)
+      else
+        # make new node and refer to head as next node
+        new_node = Node.new(value, @head)
+        # reset head to new node
+        @head = new_node
+      end  
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def search(value)
-      raise NotImplementedError
+      if @head.nil?
+        return false
+      else
+        current = @head
+
+        while current != nil
+          if current.data == value
+            return true
+          end
+          current = current.next
+        end
+      
+        return false
+      end
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
+    # Time Complexity: O(n)
+    # Space Complexity: 0(1)
     def find_max
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+
+      max = @head.data
+      current = @head
+
+      while current != nil
+        if current.data > max
+          max = current.data
+        end
+        current = current.next
+      end
+
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_min
-      raise NotImplementedError
-    end
+      if @head.nil?
+        return nil
+      end
 
+      min = @head.data
+      current = @head
+      while current != nil
+        if current.data < min
+          min = current.data
+        end
+        current = current.next
+      end
+
+      return min
+    end
 
     # method that returns the length of the singly linked list
     # Time Complexity: ?
