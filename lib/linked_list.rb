@@ -122,10 +122,19 @@ class LinkedList
     end
 
     # method to print all the values in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def visit
-      raise NotImplementedError
+      return nil if @head.nil?
+      current_node = @head
+
+      until current_node.nil?
+        puts current_node.data
+
+        current_node = current_node.next
+      end
+
+      return
     end
 
     # method to delete the first node found with specified value
@@ -133,8 +142,10 @@ class LinkedList
     # Space Complexity: O(1)
     def delete(value)
       return if @head.nil?
+
       if @head.data == value
-        @head = nil
+        @head = nil if @head.next.nil?
+        @head = @head.next unless @head.nil?
         return
       end
 
@@ -142,11 +153,18 @@ class LinkedList
       previous_node = @head.previous
 
       until current_node.nil?
+        if current_node.next.nil?
+          @tail = previous_node
+          previous_node.next = nil
+          return 
+        end
+        
         next_node = current_node.next
 
         if current_node.data == value
+          
           next_node.previous = previous_node
-          previous_node.next = current_node.next unless previous_node.nil?
+          previous_node.next = next_node
           @tail = next_node if next_node.next.nil?
           return
         end
