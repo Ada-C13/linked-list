@@ -3,10 +3,12 @@
 class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
+  attr_accessor :previous
 
-  def initialize(value, next_node = nil)
+  def initialize(value, next_node = nil, prev_node = nil)
     @data = value
     @next = next_node
+    @previous = prev_node
   end
 end
 
@@ -21,7 +23,15 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_first(value)
-      raise NotImplementedError
+      if @head.nil?
+        @head = Node.new(value)
+        @tail = nil
+      else
+        new_node = Node.new(value)
+        new_node.next = @head
+        @head.previous = new_node
+        @head = new_node
+      end
     end
 
     # method to find if the linked list contains a node with specified value
@@ -29,7 +39,15 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def search(value)
-      raise NotImplementedError
+      current_node = @head
+
+      until current_node.nil?
+        return true if current_node.data == value
+
+        current_node = current_node.next
+      end
+
+      return false
     end
 
     # method to return the max value in the linked list
