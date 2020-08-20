@@ -72,8 +72,8 @@ class LinkedList
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_min
       return nil if @head.nil? 
 
@@ -94,19 +94,37 @@ class LinkedList
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def length
-      raise NotImplementedError
+      count = 1 
+      return 0 if @head.nil? 
+      pointer = @head
+      until pointer.next.nil? 
+        count += 1 
+        pointer = pointer.next
+      end 
+      return count 
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def get_at_index(index)
-      raise NotImplementedError
+      node_index = 0 
+      pointer = @head 
+      until pointer.nil? 
+       if node_index == index 
+        return pointer.data 
+       else 
+        node_index += 1 
+       end 
+       pointer = pointer.next 
+      end 
+  
+      return nil 
     end
 
     # method to print all the values in the linked list
