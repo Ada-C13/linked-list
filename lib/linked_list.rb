@@ -21,7 +21,11 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_first(value)
-      raise NotImplementedError
+      if @head.nil?
+        @head = new Node(value)
+      else 
+        first = new Node(value, @head)
+        @head = first
     end
 
     # method to find if the linked list contains a node with specified value
