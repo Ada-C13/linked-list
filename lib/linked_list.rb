@@ -3,33 +3,53 @@
 class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
+  attr_accessor :previous
 
-  def initialize(value, next_node = nil)
+  def initialize(value, next_node = nil, previous = nil)
     @data = value
     @next = next_node
+    @previous = previous
   end
 end
 
 # Defines the singly linked list
 class LinkedList
-    def initialize
-      @head = nil # keep the head private. Not accessible outside this class
+    def initialize(head = nil, tail = nil)
+      @head = head # keep the head private. Not accessible outside this class
+      @tail = tail
     end
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_first(value)
-      raise NotImplementedError
+      if @head.nil?
+        @head = @tail = Node.new(value)
+      else
+        new_node = Node.new(value, @head, nil)
+        @head = new_node
+      end
+      return
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def search(value)
-      raise NotImplementedError
+      return false if @head.nil?
+      current = @head
+      while current
+        if current.data == value
+          return true
+        end
+        if current.next
+          current = current.next
+        else
+          return false
+        end
+      end
     end
 
     # method to return the max value in the linked list
@@ -48,10 +68,17 @@ class LinkedList
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def length
-      raise NotImplementedError
+      return 0 if @head.nil?
+      current = @head
+      count = 1
+      while current.next
+        count += 1
+        current = current.next
+      end
+      return count
     end
 
     # method that returns the value at a given index in the linked list
@@ -60,7 +87,19 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_at_index(index)
-      raise NotImplementedError
+      return nil if @head.nil?
+      return @head.data if index == 0
+      current = @head
+      i = 0
+      while i != index
+        if current.next
+          current = current.next
+          i += 1
+        else
+          return nil
+        end
+      end
+      return current.data
     end
 
     # method to print all the values in the linked list
@@ -115,17 +154,28 @@ class LinkedList
     # Additional Exercises 
     # returns the value in the first node
     # returns nil if the list is empty
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def get_first
-      raise NotImplementedError
+      if @head
+        return @head.data
+      else
+        return nil
+      end
     end
 
     # method that inserts a given value as a new last node in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def add_last(value)
-      raise NotImplementedError
+      if @head.nil?
+        @head = @tail = Node.new(value)
+      else
+        new_node = Node.new(value, nil, @tail)
+        @tail.next = new_node
+        @tail = new_node
+      end
+      return
     end
 
     # method that returns the value of the last node in the linked list
@@ -133,7 +183,11 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_last
-      raise NotImplementedError
+      if @tail
+        return @tail.data
+      else
+        return nil
+      end
     end
 
     # method to insert a new node with specific data value, assuming the linked
@@ -159,3 +213,11 @@ class LinkedList
       current.next = @head # make the last node link to first node
     end
 end
+
+list = LinkedList.new
+list.add_first(3)
+list.add_first(2)
+list.add_last(1)
+list.add_last(5)
+result = list.length
+puts result
