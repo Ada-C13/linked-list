@@ -175,7 +175,23 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      raise NotImplementedError
+      if @head.nil? 
+        return nil
+      end 
+      
+      prev = nil 
+      next_node = nil
+      current = @head
+
+      while current != nil 
+        next_node = current.next
+        current.next = prev 
+        prev = current 
+        current = next_node 
+      end
+
+      @head = prev
+      
     end
 
 
