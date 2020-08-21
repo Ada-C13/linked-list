@@ -21,7 +21,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_first(value)
-      raise NotImplementedError
+      @head = Node.new(value, @head)
     end
 
     # method to find if the linked list contains a node with specified value
@@ -29,13 +29,30 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def search(value)
-      raise NotImplementedError
+      return false if !@head
+      current = @head
+
+      while current
+        return true if current.data == value
+        current = current.next
+      end
+      
+      return false
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return if !@head
+      current = @head
+      max = @head.data
+
+      while current
+        max = current.data if current.data > max
+        current = current.next
+      end
+
+      return max
     end
 
     # method to return the min value in the linked list
@@ -43,15 +60,32 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_min
-      raise NotImplementedError
-    end
+      return if !@head
+      current = @head
+      max = @head.data
+      
+      while current
+        max = current.data if current.data < max
+        current = current.next
+      end
 
+      return max
+    end
 
     # method that returns the length of the singly linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def length
-      raise NotImplementedError
+      return 0 if !@head
+      current = @head
+      count = 0
+
+      while current
+        count += 1
+        current = current.next
+      end
+
+      return count
     end
 
     # method that returns the value at a given index in the linked list
@@ -60,21 +94,55 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_at_index(index)
-      raise NotImplementedError
+      return if !@head
+      current = @head
+      count = 0
+    
+      until count == index
+        return nil if !current
+        current = current.next
+        count += 1
+      end
+
+      return current.data
     end
 
     # method to print all the values in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def visit
-      raise NotImplementedError
+      return if !@head
+      current = @head
+
+      while current
+        print current.data
+        current = current.next
+      end
+      
+      return nil
     end
 
     # method to delete the first node found with specified value
     # Time Complexity: ?
     # Space Complexity: ?
     def delete(value)
-      raise NotImplementedError
+      return if !@head
+      current = @head
+      previous = nil
+
+      while current
+        if current.data == value
+          @head = current.next if current == @head
+          previous.next = current.next if previous # relink list if deleted value is in the middle
+          current = nil
+          return
+        else 
+          previous = current
+          current = current.next     
+        end
+      end
+      
+      return nil
     end
 
     # method to reverse the singly linked list
@@ -82,7 +150,19 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      raise NotImplementedError
+      return if !@head
+      current = @head
+      previous = nil
+
+      while current
+        @head = current if !current.next
+        temp = previous
+        previous = current
+        current = current.next
+        previous.next = temp
+      end
+
+      return nil
     end
 
 
@@ -91,7 +171,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_middle_value
-      raise NotImplementedError
+      return find_nth_from_end(length() / 2)
     end
 
     # find the nth node from the end and return its value
@@ -99,7 +179,8 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_nth_from_end(n)
-      raise NotImplementedError
+      last_index = length() - 1
+      return get_at_index(last_index - n)
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -108,7 +189,17 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def has_cycle
-      raise NotImplementedError
+      return if !@head
+      visited = Array.new(length())
+      current = @head
+
+      while current
+        return true if visited.include?(current.next)
+        visited.push(current)
+        current = current.next
+      end
+
+      return false
     end
 
 
@@ -118,14 +209,18 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_first
-      raise NotImplementedError
+      return @head ? @head.data : nil
     end
 
     # method that inserts a given value as a new last node in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def add_last(value)
-      raise NotImplementedError
+      return add_first(value) if !@head
+    
+      current = @head
+      current = current.next until !current.next
+      current.next = Node.new(value)
     end
 
     # method that returns the value of the last node in the linked list
@@ -133,7 +228,10 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_last
-      raise NotImplementedError
+      return if !@head
+      current = @head
+      current = current.next until !current.next
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
@@ -141,7 +239,24 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def insert_ascending(value)
-      raise NotImplementedError
+      return if !@head
+      current = @head
+      previous = nil
+
+      while current
+        if current.data > value
+          new_node = Node.new(value, current)
+          previous ? previous.next = new_node : @head = new_node # if previous is nil, the new_node must become the head
+          return
+        elsif !current.next # if we reach the end but haven't found a larger value
+          new_node = Node.new(value)
+          previous ? previous.next = new_node : @head = new_node
+          return
+        end
+        
+        previous = current
+        current = current.next
+      end
     end
 
     # Helper method for tests
