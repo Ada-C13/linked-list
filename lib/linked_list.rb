@@ -246,14 +246,11 @@ class LinkedList
       while current
         if current.data > value
           new_node = Node.new(value, current)
-          previous ? previous.next = new_node : @head = new_node # if previous is nil, the new_node must become the head
-          return
         elsif !current.next # if we reach the end but haven't found a larger value
           new_node = Node.new(value)
-          previous ? previous.next = new_node : @head = new_node
-          return
         end
-        
+
+        previous ? previous.next = new_node : @head = new_node # if previous is nil, the new_node must become the head
         previous = current
         current = current.next
       end
