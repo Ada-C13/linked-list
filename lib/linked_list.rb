@@ -145,7 +145,7 @@ class LinkedList
       current = @head
 
       until current.nil?
-        if current.next == value
+        if current.data == value
           current.next = current.next.next
           break
         end
@@ -184,7 +184,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_nth_from_end(n)
-      raise NotImplementedError
+      
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -211,13 +211,13 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_last(value)
-      # if @head.nil?
-      #   @head = @tail = Node.new(value)
-      # else
-      #   new_node = Node.new(value, @head)
-      #   @tail.next = new_node
-      #   @tail = new_node
-      # end
+      if @tail.nil?
+        @head = @tail = Node.new(value)
+      else
+        new_node = Node.new(value)
+        @tail.next = new_node
+        @tail = new_node
+      end
     end
 
     # method that returns the value of the last node in the linked list
