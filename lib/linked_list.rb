@@ -144,14 +144,25 @@ class LinkedList
       return nil if @head.nil?
       current = @head
 
-      until current.nil?
-        if current.data == value
-          current.next = current.next.next
-          break
-        end
-        current = current.next
+      if current.data == value
+        @head = current.next
+        return
       end
 
+      while current.next != nil
+        if current.next.data == value
+          current.next = current.next.next
+          return
+        end
+        #if current.next.data == value
+          # if current.next.next != nil
+          #   current.next = current.next.next
+          # else
+          #   @tail = current
+          # end
+        #end
+        current = current.next
+      end
     end
 
     # method to reverse the singly linked list
@@ -184,7 +195,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_nth_from_end(n)
-      
+      raise NotImplementedError
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
