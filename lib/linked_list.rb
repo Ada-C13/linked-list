@@ -158,7 +158,7 @@ class LinkedList
           previous_node.next = nil
           return 
         end
-        
+
         next_node = current_node.next
 
         if current_node.data == value
@@ -181,6 +181,12 @@ class LinkedList
     # Time Complexity: O()
     # Space Complexity: O(n)
     def reverse
+      return if @head.nil?
+      return if @head.next.nil?
+      temp = @tail
+      @tail = @head
+      @head = temp
+
       #TODO: use recursion
       return
     end
@@ -196,10 +202,23 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_nth_from_end(n)
-      raise NotImplementedError
+      length = self.length
+      return nil if length <= n
+      return @head.data if n == 0
+      return @tail.data if n == length - 1
+
+      current_index = length - 1
+      current_node = @tail
+
+      until current_index == n
+        current_index -= 1
+        current_node = current_node.previous
+      end
+
+      return current_node.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
