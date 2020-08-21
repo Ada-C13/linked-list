@@ -4,9 +4,10 @@ class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
 
-  def initialize(value, next_node = nil)
+  def initialize(value, next_node = nil, previous = nil)
     @data = value
     @next = next_node
+    @previous = previous
   end
 end
 
@@ -14,6 +15,7 @@ end
 class LinkedList
     def initialize
       @head = nil # keep the head private. Not accessible outside this class
+      @tail = nil
     end
 
     # method to add a new node with the specific data value in the linked list
@@ -21,7 +23,11 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_first(value)
-      raise NotImplementedError
+      if @head.nil?
+        @head = @tail = Node.new(value)
+      else
+        @head = Node.new(value, next_node = @head)
+      end
     end
 
     # method to find if the linked list contains a node with specified value
@@ -29,29 +35,75 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def search(value)
-      raise NotImplementedError
+      node = @head
+      return false if @head == nil || !node.next
+      # return false if 
+      return true if node.data == value
+      while (node = node.next)
+        return true if node.data == value
+      end
+      return false
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return nil if @head == nil
+      # return @head if @head.next == nil
+
+      max_value = @head.data
+      pointer = @head
+
+      until pointer.next == nil
+        if pointer.data < max_value
+          max_value = pointer.data
+        end
+
+        pointer = pointer.next
+      end
+
+      return max_value
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
+    # Time Complexity: O(n)
     # Space Complexity: ?
     def find_min
-      raise NotImplementedError
+      return nil if @head == nil
+      # return @head.data if @head.next == nil
+
+      min_value = @head.data
+      pointer = @head
+
+      until pointer.next == nil
+        if pointer.data < min_value
+          min_value = pointer.data
+        end
+
+        pointer = pointer.next
+      end
+
+      return min_value
+
     end
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
+    # Time Complexity: O(n)
     # Space Complexity: ?
     def length
-      raise NotImplementedError
+      return 0 if @head == nil
+      return 1 if @head.next == nil
+
+      pointer = @head 
+      count = 1
+      until pointer == @tail
+          count += 1
+          pointer = pointer.next
+      end 
+
+      return count
     end
 
     # method that returns the value at a given index in the linked list
@@ -60,21 +112,58 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_at_index(index)
-      raise NotImplementedError
+      return nil if @head == nil
+      return @head.data if index == 0
+
+      pointer = @head 
+      count = 0
+
+      until count == index
+          count += 1
+          pointer = pointer.next
+      end 
+
+      return pointer.data  
     end
 
     # method to print all the values in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def visit
-      raise NotImplementedError
+      return nil if @head == nil
+      print @head.data if @head.next == nil
+
+      pointer = @head 
+
+      until pointer == nil 
+          print pointer.data
+          pointer = pointer.next
+      end 
     end
 
     # method to delete the first node found with specified value
     # Time Complexity: ?
     # Space Complexity: ?
     def delete(value)
-      raise NotImplementedError
+      return if @head == nil
+      
+      if @head.next == nil
+        @head = nil
+        return
+      end
+
+      pointer = @head
+
+      until pointer.next.nil?
+        if pointer.next.data == value
+          pointer.next = pointer.next.next
+          return
+        end
+
+        pointer = pointer.next
+      end
+      
+      return
     end
 
     # method to reverse the singly linked list
@@ -82,16 +171,17 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      raise NotImplementedError
+      return nil if @head == nil
     end
 
+    ## ---
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def find_middle_value
-      raise NotImplementedError
+      return nil if @head == nil
     end
 
     # find the nth node from the end and return its value
@@ -99,7 +189,8 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_nth_from_end(n)
-      raise NotImplementedError
+      return nil if @head == nil
+      return @head.data if n == 1 && @head.next == nil
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -108,7 +199,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def has_cycle
-      raise NotImplementedError
+      return nil if @head == nil
     end
 
 
@@ -118,14 +209,15 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_first
-      raise NotImplementedError
+      return nil if @head == nil
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def add_last(value)
-      raise NotImplementedError
+      return nil if @head == nil
     end
 
     # method that returns the value of the last node in the linked list
@@ -133,7 +225,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_last
-      raise NotImplementedError
+      return nil if @head == nil
     end
 
     # method to insert a new node with specific data value, assuming the linked
@@ -141,7 +233,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def insert_ascending(value)
-      raise NotImplementedError
+      return nil if @head == nil
     end
 
     # Helper method for tests
