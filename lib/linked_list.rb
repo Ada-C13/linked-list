@@ -26,6 +26,7 @@ class LinkedList
       else 
         first = new Node(value, @head)
         @head = first
+      end
     end
 
     # method to find if the linked list contains a node with specified value
