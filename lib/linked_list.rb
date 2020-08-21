@@ -38,7 +38,14 @@ class LinkedList
   # Time Complexity: O(n)
   # Space Complexity: O(n)
   def search(value)
-    raise NotImplementedError
+    return false if @head.nil?
+
+    current = @head
+    return true if current.data == value
+    while (current = current.next)
+      return true if current.data == value
+    end
+    return false
   end
 
 
