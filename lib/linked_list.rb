@@ -179,6 +179,9 @@ class LinkedList
         previous = current
         current = @next
       end
+      temp = @tail
+      @tail = @head
+      @head = temp
     end
 
 
@@ -195,7 +198,21 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_nth_from_end(n)
-      raise NotImplementedError
+      return nil if @head.nil?
+      pointer_one = @head
+      pointer_two = @head
+      count = 0
+  
+      while count < n
+        pointer_one = pointer_one.next
+        count += 1
+      end
+  
+      while !pointer_one.nil?
+        pointer_one = pointer_one.next
+        pointer_two = pointer_two.next
+      end
+      return pointer_two
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
