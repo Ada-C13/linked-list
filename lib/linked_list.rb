@@ -178,10 +178,20 @@ class LinkedList
 
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
   def reverse
-    raise NotImplementedError
+    current = @head 
+    prev = nil 
+
+    while current != nil 
+      nextNodeLocation = current.next 
+      current.next = prev 
+      prev = current
+      current = nextNodeLocation
+    end
+
+    @head = prev
   end
 
   ## Advanced Exercises
