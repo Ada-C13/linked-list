@@ -247,7 +247,6 @@ class LinkedList
   # Space Complexity: O(1)
   def get_last
     current = @head 
-
   end
 
   # method to insert a new node with specific data value, assuming the linked
@@ -273,3 +272,4 @@ class LinkedList
     current.next = @head # make the last node link to first node
   end
 end
+
