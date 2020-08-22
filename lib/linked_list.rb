@@ -4,10 +4,9 @@ class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
 
-  def initialize(value, next_node = nil, previous = nil)
+  def initialize(value, next_node = nil)
     @data = value
     @next = next_node
-    @previous = previous
   end
 end
 
@@ -49,19 +48,18 @@ class LinkedList
     # returns the data value and not the node
     def find_max
       return nil if @head == nil
-      # return @head if @head.next == nil
 
       max_value = @head.data
       pointer = @head
 
-      until pointer.next == nil
-        if pointer.data < max_value
-          max_value = pointer.data
+      while pointer
+        if pointer.data > max_value
+          max_value = pointer.data 
         end
 
         pointer = pointer.next
       end
-
+  
       return max_value
     end
 
@@ -71,19 +69,18 @@ class LinkedList
     # Space Complexity: ?
     def find_min
       return nil if @head == nil
-      # return @head.data if @head.next == nil
 
       min_value = @head.data
       pointer = @head
 
-      until pointer.next == nil
+      while pointer
         if pointer.data < min_value
-          min_value = pointer.data
+          min_value = pointer.data 
         end
-
+        
         pointer = pointer.next
       end
-
+  
       return min_value
 
     end
@@ -135,34 +132,33 @@ class LinkedList
 
       pointer = @head 
 
-      until pointer == nil 
+      while pointer
           print pointer.data
           pointer = pointer.next
       end 
     end
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
+    # Time Complexity: O(n)
     # Space Complexity: ?
     def delete(value)
-      return if @head == nil
-      
-      if @head.next == nil
-        @head = nil
-        return
-      end
-
+      return if !@head
+      @head = @head.next if @head.data == value
       pointer = @head
+      previous = nil
 
-      until pointer.next.nil?
-        if pointer.next.data == value
-          pointer.next = pointer.next.next
+      #go through each node
+      while pointer
+      #if the node equals the value the previous node.next should pointer to current node.next and the next node.previous needs to equal the previous node
+        if pointer.data == value
+          previous.next = pointer.next if previous
+          pointer = nil
           return
+        else
+          previous = pointer 
+          pointer = pointer.next   
         end
-
-        pointer = pointer.next
       end
-      
       return
     end
 
@@ -171,7 +167,19 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      return nil if @head == nil
+      return nil if @head.nil?
+      return @head if @head.next.nil?
+      pointer = @head
+      previous = nil
+      #move each node.next to previous
+      while pointer
+        temp = previous
+        previous = pointer
+        pointer = pointer.next
+        previous.next = temp
+      end
+      # Reset the head to the new start
+      @head = previous
     end
 
     ## ---
