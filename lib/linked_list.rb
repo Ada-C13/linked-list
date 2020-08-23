@@ -30,48 +30,115 @@ class LinkedList
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) ?
+    # Space Complexity: 0(1) ?
+  
     def search(value)
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+
+      current = @head
+      while current != nil
+        if current.data == value
+          return true
+        end
+        current = current.next
+      end  
+      return false 
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
+    # Time Complexity: 0(n)
+    # Space Complexity: 0(1)
     def find_max
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+      max = @head.data
+      # p max
+      current = @head
+      while current.next != nil
+        if current.data > max
+          max = current.data
+        end
+
+        current = current.next
+      end
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n)
+    # Space Complexity: 0(1)
     def find_min
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+      max = @head.data
+      # p max
+      current = @head
+      while current.next != nil
+        if current.data < max
+          max = current.data
+        end
+
+        current = current.next
+      end
+      return max
     end
 
-
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) ?
+    # Space Complexity: 0(1) ?
     def length
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+      counter = 0
+      current = @head
+
+      while current != nil
+        counter += 1
+        current = current.next
+      end
+      return counter
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) ?
+    # Space Complexity: 0(1) ?
     def get_at_index(index)
-      raise NotImplementedError
+      node_index = 0
+      current = @head
+      while node_index < index && !current.nil?
+        node_index += 1
+        current = current.next
+      end
+  
+      if current.nil?
+        return nil
+      else
+       return current.data
+      end
     end
 
     # method to print all the values in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def visit
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+      current = @head
+
+      while current.next != nil
+        print current.next
+      end
     end
 
     # method to delete the first node found with specified value
