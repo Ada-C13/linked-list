@@ -191,10 +191,14 @@ class LinkedList
   
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(1)
   def find_middle_value
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    length = self.length
+    index = length/2
+    return self.get_at_index(index)
   end
   
   # find the nth node from the end and return its value
@@ -253,7 +257,37 @@ class LinkedList
   # Time Complexity: ?
   # Space Complexity: ?
   def insert_ascending(value)
-    raise NotImplementedError
+    if @head == null
+      @head = Node.new(value)
+      return
+    end
+
+    if @head.data > value
+      new_node = Node.new(value)
+      new_node.next = @head
+      @head = new_node
+      return
+    end
+
+    if @tail.data < value
+      new_node = Node.new(value)
+      @tail.next = new_node
+      new_node.previous = @tail
+      @tail = new_node
+      return
+    end
+
+    current = @head
+    while (current = current.next)
+      if value > current.value && value < current.next.value
+        new_node = Node.new(value)
+        current.next = new_node
+        new_node.previous = current
+        new_node.next = current.next
+        current.previous = new_node
+        return
+      end
+    end
   end
   
   # Helper method for tests
