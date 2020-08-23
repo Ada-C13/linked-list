@@ -206,10 +206,11 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
+    # this is using a DOUBLY linked list with a @tail
+    # TO SELF: there is another way using two pointers and start second pointer after n
     # Time Complexity: O(n)
     # Space Complexity: O(1)
     def find_nth_from_end(n)
-      # write other way using two pointers and start second pointer after n
       return nil if @tail.nil?
       counter = n
       current = @tail
