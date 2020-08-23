@@ -192,8 +192,8 @@ class LinkedList
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_middle_value
       n = length()
       if n == 0 
@@ -209,8 +209,8 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_nth_from_end(n) 
       l = self.length() - 1
       if n > l 
@@ -279,31 +279,27 @@ class LinkedList
 
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def insert_ascending(value)
-      # current = @head
-      
-      # while !current.nil?
-        
-      #   if current.data <= value && current.next.data >= value || current.next.nil? 
-      #     new_node = Node.new(value)
-      #     new_node.next = current.next 
-      #     current.next = new_node
-      #     return
-      #   end 
-      #   current = current.next
-      # end
-    end
-
-    def print_list 
+      if @head.nil? 
+        return nil 
+      end 
       current = @head
-      while !current.nil?
-        
-        puts current.data
-        current = current.next
-      end
-    end 
+      if current.data > value 
+        add_first(value)
+      else 
+        while !current.nil?
+          if current.data <= value && (current.next.nil? || current.next.data >= value)
+            new_node = Node.new(value)
+            new_node.next = current.next 
+            current.next = new_node
+            return
+          end 
+          current = current.next
+        end
+      end 
+    end
 
     # Helper method for tests
     # Creates a cycle in the linked list for testing purposes
