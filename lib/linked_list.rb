@@ -211,8 +211,13 @@ class LinkedList
     # assume indexing starts at 0 while counting to n
     # Time Complexity: ?
     # Space Complexity: ?
-    def find_nth_from_end(n)
-      raise NotImplementedError
+    def find_nth_from_end(n) 
+      l = self.length() - 1
+      if n > l 
+        return nil 
+      end
+      at_index = l - n 
+      get_at_index(at_index)
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -234,7 +239,6 @@ class LinkedList
       if @head.nil? 
         return nil 
       end
-
       return @head.data 
     end
 
@@ -245,9 +249,7 @@ class LinkedList
       if @head == nil 
         @head = Node.new(value) 
       else 
-
         current = @head
-      
         while current.next != nil
           current = current.next
         end
@@ -280,8 +282,28 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def insert_ascending(value)
+      # current = @head
       
+      # while !current.nil?
+        
+      #   if current.data <= value && current.next.data >= value || current.next.nil? 
+      #     new_node = Node.new(value)
+      #     new_node.next = current.next 
+      #     current.next = new_node
+      #     return
+      #   end 
+      #   current = current.next
+      # end
     end
+
+    def print_list 
+      current = @head
+      while !current.nil?
+        
+        puts current.data
+        current = current.next
+      end
+    end 
 
     # Helper method for tests
     # Creates a cycle in the linked list for testing purposes
