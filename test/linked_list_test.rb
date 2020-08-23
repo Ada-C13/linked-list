@@ -219,10 +219,10 @@ describe LinkedList do
             @list.add_first(1)
             @list.reverse
 
-            expect(@list.find_nth_from_end(0)).must_equal 1
-            expect(@list.find_nth_from_end(1)).must_equal 2
-            expect(@list.find_nth_from_end(2)).must_equal 3
-            expect(@list.find_nth_from_end(3)).must_equal 4
+            expect(@list.get_at_index(0)).must_equal 4
+            expect(@list.get_at_index(1)).must_equal 3
+            expect(@list.get_at_index(2)).must_equal 2
+            expect(@list.get_at_index(3)).must_equal 1
         end
     end
 end
