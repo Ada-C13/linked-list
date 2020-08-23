@@ -42,12 +42,12 @@ class LinkedList
 
     current = @head
     return true if current.data == value
+
     while (current = current.next)
       return true if current.data == value
     end
-    return false
+    false
   end
-
 
   # method to return the max value in the linked list
   # returns the data value and not the node
@@ -89,8 +89,50 @@ class LinkedList
   # method to delete the first node found with specified value
   # Time Complexity: ?
   # Space Complexity: ?
-  def delete(value)
-    raise NotImplementedError
+  # def deletion(value)
+  #   return false if @head.nil?
+
+  #   current = @head
+  #   if current.value == value
+  #     @head = current.next
+  #   else
+  #     while !current.next.nil? && (current.next.value != value)
+  #       if current.next.nil? || (current.next.value == value)
+  #         current.next = current.next.next
+  #       else
+  #         current = current.next
+  #       end
+  #     end
+  #     current.next = current.next.next
+  #   end
+  # end
+
+  def deletion(value)
+    current = @head
+    # If head node itself holds the key to be deleted
+    if (current != nil)
+        if (current.data == value)
+            @head = current.next
+            current = nil
+            return
+        end
+    end
+    # Search for the key to be deleted, keep track of the
+    # previous node as we need to change 'prev.next'
+    while(current != nil)
+        if current.data == value
+            break
+        prev = current
+        current = current.next
+        end
+    end
+    # if key was not present in linked list
+    if(current == nil)
+        return
+    end
+    # Unlink the node from linked list
+    prev.next = current.next
+    current = nil
   end
 
   # method to reverse the singly linked list
