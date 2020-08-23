@@ -141,12 +141,12 @@ class LinkedList
   # Space Complexity: O(1)
   def visit
     if @head.nil?
-      # puts ""
+      puts ""
     end
 
     current = @head 
     while current != nil
-      # puts current.data
+      puts current.data
 
       current = current.next
     end
@@ -179,7 +179,7 @@ class LinkedList
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def reverse
     current = @head 
     prev = nil 
@@ -255,8 +255,7 @@ class LinkedList
   # returns nil if the linked list is empty
   # Time Complexity: O(n)
   # Space Complexity: O(1)
-  def get_last
-    current = @head 
+  def get_last 
   end
 
   # method to insert a new node with specific data value, assuming the linked
