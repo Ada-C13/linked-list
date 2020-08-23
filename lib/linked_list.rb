@@ -99,7 +99,7 @@ class LinkedList
       else
         return current.data
       end
-  end
+    end
 
     # method to print all the values in the linked list
     # Time Complexity: O(n)
@@ -186,7 +186,7 @@ class LinkedList
     # Space Complexity: O(1)
     def get_first
       return @head.nil? ? nil : @head.data
-      end
+    end
 
     # method that inserts a given value as a new last node in the linked list
     # Time Complexity: O(n)
