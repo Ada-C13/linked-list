@@ -150,17 +150,14 @@ class LinkedList
       end
 
       while current.next != nil
-        if current.next.data == value
+        if current.next.data == value && current.next.next.nil?
+          current.next = nil
+          @tail = current
+          return
+        elsif current.next.data == value
           current.next = current.next.next
           return
         end
-        #if current.next.data == value
-          # if current.next.next != nil
-          #   current.next = current.next.next
-          # else
-          #   @tail = current
-          # end
-        #end
         current = current.next
       end
     end
