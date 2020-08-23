@@ -96,17 +96,14 @@ class LinkedList
     # Time Complexity: O(n)
     # Space Complexity: O(1)
     def length
-      if @head == nil 
-        return 0
-      end 
-     current = @head
-     count = 0
-     while current != nil 
-      current = current.next
-      count = count + 1
-     end 
-  
-     return count
+      current = @head
+      count = 0
+      while !current.nil?
+        count += 1
+        current = current.next
+      end
+
+      return count
     end
 
     # method that returns the value at a given index in the linked list
@@ -198,7 +195,16 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_middle_value
-      raise NotImplementedError
+      n = length()
+      if n == 0 
+        return nil 
+      end 
+      i = 0
+      current = @head 
+      while i < (n/2)
+        current = current.next
+      end 
+      return current 
     end
 
     # find the nth node from the end and return its value
@@ -238,13 +244,15 @@ class LinkedList
     def add_last(value)
       if @head == nil 
         @head = Node.new(value) 
-      end
-      pointer = @head 
-      while pointer.next != nil
-        pointer = pointer.next
-      end 
+      else 
 
-      pointer.next = Node.new(value)
+        current = @head
+      
+        while current.next != nil
+          current = current.next
+        end
+        current.next = Node.new(value)
+      end 
     end 
 
     
@@ -257,11 +265,12 @@ class LinkedList
       if @head == nil 
         return nil 
       end
-      current = @head 
-      next_node = @head.next
-      while next_node != nil
+  
+      current = nil 
+      next_node = @head
+      while !next_node.nil?
         current = next_node
-        next_node = next_node.next
+        next_node = next_node.next 
       end 
       return current.data
     end
@@ -289,3 +298,5 @@ class LinkedList
       current.next = @head # make the last node link to first node
     end
 end
+
+
