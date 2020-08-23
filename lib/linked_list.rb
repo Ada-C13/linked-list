@@ -157,7 +157,21 @@ class LinkedList
   # Time Complexity: ?
   # Space Complexity: ?
   def reverse
-    raise NotImplementedError
+    if @head.nil?
+      return nil
+    else
+      current = @head
+      previous = nil 
+      temp = current.next 
+      until current.next.nil?
+        temp = current.next 
+        current.next = previous
+        previous = current 
+        current = temp 
+      end
+      current.next = previous
+      @head = current
+    end
   end
 
   ## Advanced Exercises
@@ -173,7 +187,23 @@ class LinkedList
   # Time Complexity: ?
   # Space Complexity: ?
   def find_nth_from_end(n)
-    raise NotImplementedError
+    if @head.nil?
+      return nil
+    else
+      current = @head
+      i = 0 
+      trailing_current = @head
+      until current.nil?
+        if i > n 
+          trailing_current = trailing_current.next
+        elsif current.next.nil? && n > i
+          return nil 
+        end
+        current = current.next 
+        i += 1
+      end
+      return trailing_current.data
+    end
   end
 
   # checks if the linked list has a cycle. A cycle exists if any node in the
