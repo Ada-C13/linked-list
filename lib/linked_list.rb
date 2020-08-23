@@ -161,7 +161,6 @@ class LinkedList
       if current.data == value
         current.next.previous = current.previous
         current.previous.next = current.next
-        current = current.next
       end
     end
     
