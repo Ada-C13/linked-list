@@ -29,7 +29,16 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def search(value)
-      raise NotImplementedError
+      current = @head
+
+      while current
+        if current.data == value 
+          return true
+        end
+        current = current.next
+      end
+
+      return false
     end
 
     # method to return the max value in the linked list
@@ -40,14 +49,16 @@ class LinkedList
       return nil if @head == nil
 
       current = @head
-      max_value = @head.data
+      max = @head.data
 
-      if current.data >= max
-        max_value = current.data
+      while current
+        if current.data > max
+          max = current.data 
+        end
         current = current.next
       end
 
-      return max_value
+      return max
     end
 
     # method to return the min value in the linked list
@@ -58,14 +69,16 @@ class LinkedList
       return nil if @head == nil
 
       current = @head
-      min_value = @head.data
+      min = @head.data
 
-      if current.data <= min
-        min_value = current.data
+      while current
+        if current.data < min
+          min = current.data 
+        end
         current = current.next
       end
 
-      return min_value
+      return min
     end
 
 
@@ -106,7 +119,14 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def visit
-      raise NotImplementedError
+      print @head.data if @head.next == nil
+
+      current = @head 
+
+      while current
+        print current.data
+        current = current.next
+      end 
     end
 
     # method to delete the first node found with specified value
@@ -130,7 +150,9 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_middle_value
-      raise NotImplementedError
+      length = self.length
+      mid = length/2
+      return get_at_index(mid)
     end
 
     # find the nth node from the end and return its value
