@@ -141,32 +141,33 @@ class LinkedList
     # Space Complexity: O(n)
  
     def delete(value)
-      
+      return nil if @head.nil? 
       pointer = @head 
 
 
       while !pointer.nil? 
        if pointer.data == value 
-        if pointer == @head && pointer == @tail 
-          @head = @tail = nil
-          return 
-        elsif pointer == @head 
-          @head = pointer.next
-          @head.previous = nil
-          return
-        elsif pointer == @tail
-          @tail = pointer.previous
-          @tail.next = nil
-          return
-        else  
-          pointer.next.previous = pointer.previous
-          pointer.previous.next = pointer.next
-          return
+        if pointer == @head 
+          @head = pointer.next 
         end 
+
+        if pointer == @tail
+          @tail = pointer.previous
+        end 
+
+        if !pointer.next.nil?
+          pointer.next.previous = pointer.previous
+        end 
+        
+        if !pointer.previous.nil?
+          pointer.previous.next = pointer.next 
+        end 
+        return
        end 
-       pointer = pointer.next 
+
+       pointer = pointer.next
       end 
-  
+      
     end
 
     # method to reverse the singly linked list
@@ -198,10 +199,26 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_nth_from_end(n)
-      raise NotImplementedError
+      node_index = 0
+      pointer = @tail 
+
+      until pointer == @head 
+       if node_index == n 
+        return pointer.data 
+       else 
+        node_index += 1 
+       end 
+       pointer = pointer.previous 
+      end 
+
+      if pointer == @head && (node_index  == n )
+        return @head.data
+      end 
+  
+      return nil 
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -229,8 +246,9 @@ class LinkedList
     # Space Complexity: ?
     def add_last(value)
       
+      temp = Node.new(value)
       if @head.nil?
-        @head = Node.new(value,@head)
+        @head = @tail = temp
         return 
       end 
 
@@ -239,7 +257,9 @@ class LinkedList
         current = current.next 
       end 
 
-      current.next = Node.new(value)
+      current.next = temp
+      temp.previous = current
+      @tail = temp
     end
 
     # method that returns the value of the last node in the linked list
