@@ -56,7 +56,7 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     # Time Complexity: O(n)
-    # Space Complexity: 0(1)
+    # Space Complexity: O(1)
     def find_max
       if @head.nil?
         return nil
@@ -174,27 +174,46 @@ class LinkedList
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def reverse
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+      
+      current = @head
+      prev = nil
+      
+      while current != nil
+        next_node_to_visit = current.next
+        current.next = prev
+        prev = current
+        current = next_node_to_visit
+      end
+
+      @head = prev
     end
 
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    # TODO: WRITE TESTS
     def find_middle_value
-      raise NotImplementedError
+      length = self.length
+      middle_index = length/2
+      return get_at_index(middle_index)
     end
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_nth_from_end(n)
-      raise NotImplementedError
+      length = self.length
+      n_from_end_index = length - n - 1
+      return self.get_at_index(n_from_end_index)
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
