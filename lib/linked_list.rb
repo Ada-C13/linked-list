@@ -60,13 +60,13 @@ class LinkedList
       return nil if @head.nil? 
       max = @head.data
       pointer = @head
-      while !pointer.next.nil? 
+
+      while !pointer.nil?
         if pointer.data > max 
           max = pointer.data 
         end 
         pointer = pointer.next 
       end 
-      return @tail.data if @tail.data > max 
       return max 
     end
 
@@ -80,15 +80,13 @@ class LinkedList
       min = @head.data
    
       pointer = @head
-      while !pointer.next.nil? 
-        if pointer.data < min 
+      while !pointer.nil?
+        if pointer.data < min
           min = pointer.data 
-        elsif pointer.tail < min 
-          min = pointer.tail 
         end 
         pointer = pointer.next 
       end 
-     
+    
       return min 
     end
 
@@ -128,17 +126,47 @@ class LinkedList
     end
 
     # method to print all the values in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def visit
-      raise NotImplementedError
+      pointer = @head 
+      while !pointer.nil? 
+        puts pointer.data 
+        pointer = pointer.next 
+      end 
     end
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+ 
     def delete(value)
-      raise NotImplementedError
+      
+      pointer = @head 
+
+
+      while !pointer.nil? 
+       if pointer.data == value 
+        if pointer == @head && pointer == @tail 
+          @head = @tail = nil
+          return 
+        elsif pointer == @head 
+          @head = pointer.next
+          @head.previous = nil
+          return
+        elsif pointer == @tail
+          @tail = pointer.previous
+          @tail.next = nil
+          return
+        else  
+          pointer.next.previous = pointer.previous
+          pointer.previous.next = pointer.next
+          return
+        end 
+       end 
+       pointer = pointer.next 
+      end 
+  
     end
 
     # method to reverse the singly linked list
@@ -146,7 +174,17 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      raise NotImplementedError
+      pointer = @head 
+
+      while !pointer.nil?
+        temp = pointer.previous
+        pointer.previous = pointer.next 
+        pointer.next = temp 
+        pointer = pointer.previous
+      end 
+        temp = @head
+        @head = @tail
+        @tail = temp
     end
 
 
@@ -182,14 +220,26 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_first
-      raise NotImplementedError
+      return nil if @head.nil? 
+      return @head.data 
     end
 
     # method that inserts a given value as a new last node in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def add_last(value)
-      raise NotImplementedError
+      
+      if @head.nil?
+        @head = Node.new(value,@head)
+        return 
+      end 
+
+      current = @head 
+      until current.next.nil? 
+        current = current.next 
+      end 
+
+      current.next = Node.new(value)
     end
 
     # method that returns the value of the last node in the linked list
@@ -197,7 +247,14 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_last
-      raise NotImplementedError
+      
+      current = @head 
+
+      until current.next.nil?
+        current = current.next
+      end 
+
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
