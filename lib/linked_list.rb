@@ -95,7 +95,7 @@ class LinkedList
     # Space Complexity: 0(1) ?
     def length
       if @head.nil?
-        return nil
+        return 0
       end
       counter = 0
       current = @head
