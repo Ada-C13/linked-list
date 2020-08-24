@@ -26,8 +26,8 @@ class LinkedList
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: o1
+    # Space Complexity: o1
     def search(value)
       current = @head
 
@@ -43,8 +43,8 @@ class LinkedList
 
     # method to return the max value in the linked list
     # returns the data value and not the node
-    #Time Complexity: o(n)
-    # Space Complexity: o(1)
+    #Time Complexity: on
+    # Space Complexity: o1
     def find_max
       return nil if @head == nil
 
@@ -130,10 +130,25 @@ class LinkedList
     end
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: on
+    # Space Complexity: o1
     def delete(value)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      if @head.data == value
+        @head = @head.next
+        return
+      end
+
+      previous = @head 
+      current = @head.next 
+
+      until current.nil? || current.data == value
+        previous = current
+        current = current.next
+      end
+
+      previous.next = current.next
     end
 
     # method to reverse the singly linked list
@@ -179,8 +194,8 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_first
-      return nil if head.nil?
-      return head.data
+      return nil if @head.nil?
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
