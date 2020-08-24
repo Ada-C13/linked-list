@@ -24,7 +24,7 @@ class LinkedList
       if @head.nil?
         @head = Node.new(value)
       else
-        @head = Node.new(value)
+        @head = Node.new(value, @head)
       end
     end
 
