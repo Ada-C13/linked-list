@@ -59,7 +59,7 @@ class LinkedList
       max = @head.data
       # p max
       current = @head
-      while current.next != nil
+      while current != nil
         if current.data > max
           max = current.data
         end
@@ -77,17 +77,17 @@ class LinkedList
       if @head.nil?
         return nil
       end
-      max = @head.data
+      min = @head.data
       # p max
       current = @head
-      while current.next != nil
-        if current.data < max
-          max = current.data
+      while current != nil
+        if current.data < min
+          min = current.data
         end
 
         current = current.next
       end
-      return max
+      return min
     end
 
     # method that returns the length of the singly linked list
@@ -144,23 +144,43 @@ class LinkedList
     # method to delete the first node found with specified value
     # Time Complexity: 0(n)
     # Space Complexity: 0(1)
+    # def delete(value)
     def delete(value)
       if @head.nil?
-        return nil
+        return 0
       end
-      previous = nil
+
+      if @head.data == value
+        @head = @head.next
+        return
+      end
+
       current = @head
-
       while current != nil
-
-        if current.data == value
-         previous.next = current.next 
+        if current.next.data == value
+         current.next = current.next.next
+         return
         end
 
-        previous = current
         current = current.next
       end
     end
+    #   if @head.nil?
+    #     return nil
+    #   end
+    #   previous = nil
+    #   current = @head
+
+    #   while current != nil
+
+    #     if current.data == value
+    #      previous = current.next 
+    #     end
+
+    #     previous = current
+    #     current = current.next
+    #   end
+    # end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
@@ -217,7 +237,11 @@ class LinkedList
     # Time Complexity: 0(n) ?
     # Space Complexity: 0(1) ?
     def find_nth_from_end(n)
-      counter = 0
+      if @head.nil?
+        return nil
+      end
+      
+      counter = - 1
       current = @head
 
       while current != nil
@@ -225,20 +249,21 @@ class LinkedList
         current = current.next
       end
 
-      return "Its to high" if n > counter
+      return nil if n > counter 
 
       current = @head
       n_node = counter - n
-      counter = 0
-
+      count = 0
+  
       while current != nil
-        if counter == n_node
-         return current
+        if count == n_node
+         return current.data
         end
         
-       counter += 1
+       count += 1
        current = current.next
       end
+      
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -286,12 +311,14 @@ class LinkedList
     # Space Complexity: 0(1) ?
     def add_last(value)
       if @head.nil?
-        @head = Node.new(value)
+        @head = Node.new(value, @head)
+        return
       end
+
 
       current = @head
       while current != nil
-
+        
         if current.next == nil
           current.next = Node.new(value)
           break
