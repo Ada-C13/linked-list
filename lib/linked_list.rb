@@ -35,7 +35,7 @@ class LinkedList
   
     def search(value)
       if @head.nil?
-        return nil
+        return false
       end
 
       current = @head
@@ -165,7 +165,7 @@ class LinkedList
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     # Time Complexity: 0(n) ?
-    # Space Complexity: ?
+    # Space Complexity: o(1)?
     def reverse
       if @head.nil?
        return nil
@@ -187,8 +187,8 @@ class LinkedList
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) ?
+    # Space Complexity: 0(1) ?
     def find_middle_value
       if @head.nil?
         return nil
@@ -214,8 +214,8 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) ?
+    # Space Complexity: 0(1) ?
     def find_nth_from_end(n)
       counter = 0
       current = @head
@@ -244,8 +244,8 @@ class LinkedList
     # checks if the linked list has a cycle. A cycle exists if any node in the
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n)?
+    # Space Complexity: 0(n) ?
     def has_cycle
       if @head.nil?
         return nil
@@ -271,8 +271,8 @@ class LinkedList
     # Additional Exercises 
     # returns the value in the first node
     # returns nil if the list is empty
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(1) ?
+    # Space Complexity: 0(1) ?
     def get_first
       if @head.nil?
         return nil
@@ -282,8 +282,8 @@ class LinkedList
     end
 
     # method that inserts a given value as a new last node in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) ?
+    # Space Complexity: 0(1) ?
     def add_last(value)
       if @head.nil?
         @head = Node.new(value)
@@ -303,8 +303,8 @@ class LinkedList
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n)
+    # Space Complexity: 0(1) ?
     def get_last
       if @head.nil?
         return nil
@@ -324,8 +324,8 @@ class LinkedList
 
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n)
+    # Space Complexity: 0(1) ?
     def insert_ascending(value)
       if @head.nil?
         @head = Node.new(value)
