@@ -18,80 +18,208 @@ class LinkedList
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_first(value)
-      raise NotImplementedError
+      @head = Node.new(value, @head)
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def search(value)
-      raise NotImplementedError
+      if head.nil?
+        return false
+      end
+
+      current = @head
+
+      while current != nil
+        if current.data == value
+          return true
+        end
+        current = current.next
+      end
+
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_max
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+
+      max = @head.data
+      current = @head
+      while current != nil
+        if max < current.data
+          max = current.data
+        end
+
+        current = current.next
+      end
+
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_min
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+
+      min = @head.data
+      current = @head
+      while current != nil
+        if min > current.data
+          min = current.data
+        end
+
+        current = current.next
+      end
+
+      return min
     end
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def length
-      raise NotImplementedError
+      if @head.nil?
+        return 0
+      end
+
+      length = 0
+      current = @head
+      while current != nil
+        length += 1
+        current = current.next
+      end
+
+      return length
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: o(n)
+    # Space Complexity: o(1)
     def get_at_index(index)
-      raise NotImplementedError
+      if @head.nil?
+        return 0
+      end
+
+      count = 0
+      current = @head
+      while current != nil
+        if count == index
+          return current.data
+        end
+        count += 1
+        current = current.next
+      end
+
+      return nil
     end
 
     # method to print all the values in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def visit
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+
+      current = @head
+      while current != nil
+        p current.data
+        current = current.next
+      end
+
+      return
     end
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def delete(value)
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+
+      if @head.data == value
+        @head = @head.next
+        return
+      end
+
+      previous = nil
+      current = @head
+      while current != nil
+        if current.data == value
+          previous.next = current.next_node
+          current = nil
+          return
+        end
+
+        previous = current
+        current = current.next
+      end
+
+      return
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def reverse
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+
+      current = @head
+      previous = nil
+
+      while current != nil
+        temp = current.next
+        current.next = previous
+        previous = current
+        current = temp
+      end
+
+      @head = previous
+      return
     end
 
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def find_middle_value
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+
+      slow = @head
+      fast = @head.next
+      while fast != nil
+        slow = slow.next
+        fast = fast.next
+        if fast != nil
+          fast = fast.next
+        end
+      end
+
+      return slow.data
     end
 
     # find the nth node from the end and return its value
@@ -99,7 +227,22 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_nth_from_end(n)
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+
+      back = @head
+      front = @head
+      count = 1
+      while front != nil
+        front = front.next
+        count += 1
+        if front > n
+          back = back.next
+        end
+      end
+
+      return back.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -108,7 +251,24 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def has_cycle
-      raise NotImplementedError
+      if @head.nil?
+        return
+      end
+
+      slow = @head
+      fast = @head.next
+      while fast != nil
+        slow = slow.next
+        fast = fast.next
+        if fast != nil
+          fast = fast.next
+        end
+        if fast == slow
+          return true
+        end
+      end
+
+      return false
     end
 
 
