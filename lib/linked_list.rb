@@ -44,7 +44,7 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      return nil if @head = nil
+      return nil if @head == nil
       
       current = @head
       max = nil
@@ -90,17 +90,11 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_at_index(index)
-      return @head if index == 0 
+      return nil if @head.nil?
 
       current = @head
-
-      count = index + 1
-      count.times do
-        if current == nil
-          return nil
-        else
-          current = current.next
-        end
+      index.times do 
+        current = current.next
       end
       return current.data
     end
