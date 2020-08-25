@@ -4,10 +4,9 @@ class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
 
-  def initialize(value)
+  def initialize(value, next = nil)
     @data = value
     @next = next_node
-    @next = nil
   end
 end
 
