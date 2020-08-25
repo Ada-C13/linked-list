@@ -12,7 +12,7 @@ end
 
 # Defines the singly linked list
 class LinkedList
-    def initialize
+    def initialize ##
       @head = nil # keep the head private. Not accessible outside this class
     end
 
