@@ -31,15 +31,12 @@ class LinkedList
     # Time Complexity: o(n)?
     # Space Complexity: O(1)?
     def search(value)
+      return false if @head == nil
       current = @head
-      return false if current == nil
 
       until current == nil
-        if current == value
-          return true
-        else
-          current = current.next
-        end
+        return true if current == value
+        current = current.next
       end
       return false
     end
@@ -47,9 +44,11 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
+      return nil if @head = nil
+      
+      current = @head
       max = nil
-      return max if current = nil
-
+      
       until current == nil
         current > max ? max = current : current = current.next
       end
@@ -61,11 +60,11 @@ class LinkedList
     # Time Complexity: O(n)?
     # Space Complexity: O(1)?
     def find_min
+      return nil if @head == nil
+      
       min = nil
       current = @head
 
-      return min if current == nil
-      
       until current == nil
         current < min ? min = current : current = current.next
       end
@@ -104,7 +103,7 @@ class LinkedList
           current = current.next
         end
       end
-
+      return current
     end
 
     # method to print all the values in the linked list
