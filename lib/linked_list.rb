@@ -50,7 +50,7 @@ class LinkedList
       current = @head
       
       until current == nil
-        current.data > max ? max = current : current = current.next
+        current.data > max.data ? max = current : current = current.next
       end
       return max.data
     end
@@ -65,7 +65,7 @@ class LinkedList
       current = @head
 
       until current == nil
-        current.data < min ? min = current : current = current.next
+        current.data < min.data ? min = current : current = current.next
       end
       return min.data
     end
