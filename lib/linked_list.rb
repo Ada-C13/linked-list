@@ -46,7 +46,7 @@ class LinkedList
     def find_max
       return nil if @head == nil
       
-      max = 1/.000000000001
+      max = @head
       current = @head
       
       until current == nil
@@ -61,7 +61,7 @@ class LinkedList
     # Space Complexity: O(1)?
     def find_min
       return nil if @head == nil
-      min = -1/.000000000001
+      min = @head
       current = @head
 
       until current == nil
