@@ -21,7 +21,6 @@ class LinkedList
     # Time Complexity: O(1)
     # Space Complexity: O(1)
     def add_first(value)
-      return nil if @head.nil?
       @head = Node.new(value, @head)
     end
 
