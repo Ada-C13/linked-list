@@ -52,7 +52,6 @@ class LinkedList
       max = nil
       reutrn max if current = @head
 
-      if @current == nil
       until current == nil
         current > max ? max = current : current = current.next
       end
@@ -66,7 +65,6 @@ class LinkedList
     def find_min
       min = nil
       current = @head
-
       return min if current == nil
       until current == nil
         current < min ? min = current : current = current.next
