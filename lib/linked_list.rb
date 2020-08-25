@@ -24,7 +24,6 @@ class LinkedList
     def add_first(value)
       if @head.nil?
         @head = Node.new(value, @head)
-      end
     end
 
     # method to find if the linked list contains a node with specified value
@@ -36,15 +35,15 @@ class LinkedList
       if @head.nil?
         return false
       else 
-        current = @head
-          while current.next != nil
-            if current.data == value
-              return true
-            else 
-            current = current.next
-            end
+      current = @head
+        while current.next != nil
+          if current.data == value
+            return true
+          else 
+          current = current.next
           end
         end
+      end
       return false 
     end
 
