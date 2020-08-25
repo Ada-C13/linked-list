@@ -42,6 +42,7 @@ class LinkedList
         current = current.next
       end
 
+      return false
     end
 
     # method to return the max value in the linked list
@@ -278,14 +279,25 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_first
-      raise NotImplementedError
+      return @head.data if @head != nil
     end
 
     # method that inserts a given value as a new last node in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def add_last(value)
-      raise NotImplementedError
+
+      current = @head
+      newNode = Node.new(value, nil)
+  
+      if current.nil?
+        @head = newNode
+      else
+        until current.next.nil?
+          current = current.next
+        end
+        current.next = newNode
+      end
     end
 
     # method that returns the value of the last node in the linked list
@@ -293,7 +305,15 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_last
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      else 
+        current = @head
+        until current.next.nil?
+          current = current.next
+        end
+      end
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
