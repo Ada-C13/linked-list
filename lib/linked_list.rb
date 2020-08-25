@@ -24,16 +24,17 @@ class LinkedList
       if @head.nil?
         @head = Node.new(value)
       else  
-        @head = Node.new(data, @head)
+        @head = Node.new(value, @head)
       end
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     # Time Complexity: o(n)?
-    # Space Complexity: O(n)?
+    # Space Complexity: O(1)?
     def search(value)
       current = @head
+      return false if current = nil
 
       until current == nil
         if current == value
@@ -59,10 +60,15 @@ class LinkedList
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)?
+    # Space Complexity: O(1)?
     def find_min
-      raise NotImplementedError
+      min = nil
+      current = @head
+      until current == nil
+        current > min ? min = current : current = current.next
+      end
+      return min
     end
 
 
@@ -70,7 +76,12 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def length
-      raise NotImplementedError
+      count = 0
+      current = @head
+      until current == nil
+        count += 1 
+        current = current.next
+      end
     end
 
     # method that returns the value at a given index in the linked list
@@ -79,14 +90,27 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_at_index(index)
-      raise NotImplementedError
+      current = @head
+      index.times do
+        if current == nil
+          return nil
+        else
+          current = current.next
+        end
+      end
+
     end
 
     # method to print all the values in the linked list
     # Time Complexity: ?
     # Space Complexity: ?
     def visit
-      raise NotImplementedError
+      current = @head
+
+      until current == nil
+        puts current
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
