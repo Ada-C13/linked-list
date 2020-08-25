@@ -63,8 +63,6 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_min
-      current = @head
-      min = @head.data
       if @head.nil?
         return nil
       end
