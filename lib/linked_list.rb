@@ -52,87 +52,95 @@ class LinkedList
   # method to return the max value in the linked list
   # returns the data value and not the node
   def find_max
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    max = @head.data
+    current = @head
+
+    while (current = current.next)
+      max = current.data if current.data > max
+    end
+
+    max
   end
 
   # method to return the min value in the linked list
   # returns the data value and not the node
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
   def find_min
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    min = @head.data
+    current = @head
+    while (current = current.next)
+      min = current.data if current.data < min
+    end
+    min
   end
 
   # method that returns the length of the singly linked list
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
   def length
-    raise NotImplementedError
+    return 0 if @head.nil?
+
+    count = 1
+    current = @head
+
+    while (current = current.next)
+      count += 1
+    end
+    count
   end
 
   # method that returns the value at a given index in the linked list
   # index count starts at 0
   # returns nil if there are fewer nodes in the linked list than the index value
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
   def get_at_index(index)
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    current = @head
+    index.times do
+      current = current.next
+    end
+    current.data
   end
 
   # method to print all the values in the linked list
   # Time Complexity: ?
   # Space Complexity: ?
   def visit
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    current = @head
+    print @head.data.to_s + '-->'
+    while (current = current.next)
+      print current.data.to_s + '-->'
+    end
   end
 
   # method to delete the first node found with specified value
-  # Time Complexity: ?
-  # Space Complexity: ?
-  # def deletion(value)
-  #   return false if @head.nil?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
+  def delete(value)
+    return false if @head.nil?
 
-  #   current = @head
-  #   if current.value == value
-  #     @head = current.next
-  #   else
-  #     while !current.next.nil? && (current.next.value != value)
-  #       if current.next.nil? || (current.next.value == value)
-  #         current.next = current.next.next
-  #       else
-  #         current = current.next
-  #       end
-  #     end
-  #     current.next = current.next.next
-  #   end
-  # end
-
-  def deletion(value)
     current = @head
-    # If head node itself holds the key to be deleted
-    if (current != nil)
-        if (current.data == value)
-            @head = current.next
-            current = nil
-            return
+    if current.data == value
+      @head = current.next
+    else
+      until current.next.nil?
+        if current.next.data == value
+          current.next = current.next.next
+          return
         end
-    end
-    # Search for the key to be deleted, keep track of the
-    # previous node as we need to change 'prev.next'
-    while(current != nil)
-        if current.data == value
-            break
-        prev = current
+        current.next.next = nil if current.next.next == @tail && current.next.next.data == value
         current = current.next
-        end
+      end
     end
-    # if key was not present in linked list
-    if(current == nil)
-        return
-    end
-    # Unlink the node from linked list
-    prev.next = current.next
-    current = nil
   end
 
   # method to reverse the singly linked list
@@ -140,7 +148,19 @@ class LinkedList
   # Time Complexity: ?
   # Space Complexity: ?
   def reverse
-    raise NotImplementedError
+    # no need to reverse if head is nil
+    # or there is only 1 node.
+    return head if !head || !head.next
+    current_head = head.next
+    reversed_list = head
+    reversed_list.next = nil
+    while current_head
+      temp = current_head
+      current_head = current_head.next
+      temp.next = reversed_list
+      reversed_list = temp
+    end
+    reversed_list
   end
 
   ## Advanced Exercises
@@ -149,6 +169,18 @@ class LinkedList
   # Space Complexity: ?
   def find_middle_value
     raise NotImplementedError
+    ​
+    # slowPointer = @head
+    # fastPointer = @head
+    ​
+    # if @head !=nil
+    #     while (fastPointer !=nil && fastPointer.next !=nil)
+    #         fastPointer = fastPointer.next.next
+    #         slowPointer = slowPointer.next
+    #     end
+    # end
+    #     # print("The middle element is: ", slow_ptr.data)
+    #     slowPointer.data
   end
 
   # find the nth node from the end and return its value
@@ -174,22 +206,34 @@ class LinkedList
   # Time Complexity: ?
   # Space Complexity: ?
   def get_first
-    raise NotImplementedError
+    @head ? @head.data : nil
   end
 
   # method that inserts a given value as a new last node in the linked list
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
   def add_last(value)
-    raise NotImplementedError
+    new_node = Node.new(value)
+    if @head.nil?
+      add_first(new_node.data)
+      return
+    end
+    current = @head
+    current = current.next until current.next.nil?
+    current.next = new_node
+    new_node.next = nil
   end
 
   # method that returns the value of the last node in the linked list
   # returns nil if the linked list is empty
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
   def get_last
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    current = @head
+    current = current.next until current.next.nil?
+    current.data
   end
 
   # method to insert a new node with specific data value, assuming the linked
@@ -206,10 +250,11 @@ class LinkedList
   def create_cycle
     return if @head.nil? # don't do anything if the linked list is empty
 
+    ​
     # navigate to last node
     current = @head
     current = current.next until current.next.nil?
-
+    ​
     current.next = @head # make the last node link to first node
   end
 end
