@@ -27,8 +27,8 @@ class LinkedList
     
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: 
-    # Space Complexity: ?
+    # Time Complexity:0(n) with n being the length of the list
+    # Space Complexity:0(n)
     def search(value)
       return false if @head.nil?
       
@@ -46,8 +46,8 @@ class LinkedList
     # returns the data value and not the node
     def find_max
       return nil if @head.nil?
+  
       current = @head 
-
       max = current.data
       while (current.next != nil)
         current = current.next
@@ -60,12 +60,11 @@ class LinkedList
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) with n being the length of the list
+    # Space Complexity: 0(n)
     def find_min
      return nil if @head.nil?
      
-
       current = @head
       min = current.data
       while (current.next != nil)
@@ -79,8 +78,8 @@ class LinkedList
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) with n being the length
+    # Space Complexity: 0(n)
     def length
       current_node = @head
       length = 0
@@ -97,8 +96,8 @@ class LinkedList
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) with n being the length of the list
+    # Space Complexity: 0(n)
     def get_at_index(index)
       return nil if @head.nil?
       current = @head
@@ -110,8 +109,8 @@ class LinkedList
     end
 
     # method to print all the values in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) with n being the length of the list
+    # Space Complexity: 0(n)
     def visit
       current = @head
       if current = current.data
@@ -121,7 +120,7 @@ class LinkedList
      
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
+    # Time Complexity: 0(n) with n being the length of the list
     # Space Complexity: ?
     def delete(value)
       # if head is nil - return
@@ -146,8 +145,8 @@ class LinkedList
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: 0(n) n being the length of the list
+    # Space Complexity: 0(n)
     def reverse
       return if @head.nil?
       current = @head
