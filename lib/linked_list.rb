@@ -35,7 +35,7 @@ class LinkedList
       current = @head
 
       until current == nil
-        return true if current == value
+        return true if current.data == value
         current = current.next
       end
       return false
