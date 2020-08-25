@@ -183,11 +183,21 @@ class LinkedList
     def reverse
       return if @head.nil?
       return if @head.next.nil?
-      temp = @tail
-      @tail = @head
-      @head = temp
 
-      #TODO: use recursion
+      temp = @head
+      @head = temp
+      @tail = @head
+
+      current = @head
+
+      until current == nil
+        temp = current.next
+        current.next = current.previous
+        current.previous = temp
+
+        current = current.previous
+      end
+
       return
     end
 
