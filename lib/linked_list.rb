@@ -35,20 +35,20 @@ class LinkedList
       current = @head
       while (current.next != nil && current.data != value) do
         current = current.next
+        if current.data != value
+          return false
+        end
       end
-      
-      
-      return 
+      return true
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      if @head.nil?
-        return nil
-      end
-      
+      return nil if @head.nil?
+      current = @head 
 
+      max = 0
       while (current.next != nil)
         current = current.next
         if current.data > max
@@ -63,11 +63,11 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def find_min
-      if @head.nil?
-        return nil
-      end
-    
-      
+     return nil if @head.nil?
+     
+
+      current = @head
+      min = 0
       while (current.next != nil)
         current = current.next
         if current.data < min
