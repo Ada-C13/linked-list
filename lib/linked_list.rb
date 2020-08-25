@@ -48,7 +48,7 @@ class LinkedList
     # returns the data value and not the node
     def find_max
       max = nil
-      return max if current = @head
+      return max if current = nil
 
       until current == nil
         current > max ? max = current : current = current.next
@@ -63,7 +63,9 @@ class LinkedList
     def find_min
       min = nil
       current = @head
+
       return min if current == nil
+      
       until current == nil
         current < min ? min = current : current = current.next
       end
