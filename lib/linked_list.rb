@@ -65,7 +65,7 @@ class LinkedList
       min = nil
       current = @head
       until current == nil
-        current > min ? min = current : current = current.next
+        current < min ? min = current : current = current.next
       end
       return min
     end
@@ -90,7 +90,7 @@ class LinkedList
     # Space Complexity: ?
     def get_at_index(index)
       current = @head
-      count = indext + 1
+      count = index + 1
       count.times do
         if current == nil
           return nil
