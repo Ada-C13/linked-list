@@ -52,7 +52,7 @@ class LinkedList
       until current == nil
         current > max ? max = current : current = current.next
       end
-      return max
+      return max.data
     end
 
     # method to return the min value in the linked list
@@ -61,14 +61,13 @@ class LinkedList
     # Space Complexity: O(1)?
     def find_min
       return nil if @head == nil
-      
       min = nil
       current = @head
 
       until current == nil
         current < min ? min = current : current = current.next
       end
-      return min
+      return min.data
     end
 
 
@@ -91,9 +90,9 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def get_at_index(index)
-      current = @head
+      return @head if index == 0 
 
-      return current if index == 0 
+      current = @head
 
       count = index + 1
       count.times do
@@ -103,7 +102,7 @@ class LinkedList
           current = current.next
         end
       end
-      return current
+      return current.data
     end
 
     # method to print all the values in the linked list
