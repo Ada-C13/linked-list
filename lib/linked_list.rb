@@ -34,7 +34,7 @@ class LinkedList
     # Space Complexity: O(1)?
     def search(value)
       current = @head
-      return false if current = nil
+      return false if current == nil
 
       until current == nil
         if current == value
@@ -42,9 +42,8 @@ class LinkedList
         else
           current = current.next
         end
-        return false
       end
-      
+      return false
     end
 
     # method to return the max value in the linked list
@@ -91,7 +90,8 @@ class LinkedList
     # Space Complexity: ?
     def get_at_index(index)
       current = @head
-      index.times do
+      count = indext + 1
+      count.times do
         if current == nil
           return nil
         else
