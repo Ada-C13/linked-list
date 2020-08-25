@@ -24,6 +24,7 @@ class LinkedList
     def add_first(value)
       if @head.nil?
         @head = Node.new(value, @head)
+      end 
     end
 
     # method to find if the linked list contains a node with specified value
@@ -59,8 +60,10 @@ class LinkedList
         while current.next != nil
           if current.data > max
             max = current.data
-          current = current.next
+            current = current.next
+          end
         end
+      end
       return max
     end
 
@@ -78,8 +81,10 @@ class LinkedList
         while current.next != nil
           if current.data < min
             min = current.data
-          current = current.next
-        end
+            current = current.next
+          end
+        end 
+      end 
       return min
     end
 
@@ -159,13 +164,13 @@ class LinkedList
     # Space Complexity: ?
     def reverse
       current = @head
-      @prev = nil
-      @next = nil
+      current.prev = nil
+      current.next = nil
   
       while current != nil
         temp = current.next
-        current.next = @prev
-        @prev = current
+        current.next = current.prev
+        current.prev = current
         current = temp
       end
     end
