@@ -50,7 +50,7 @@ class LinkedList
     # returns the data value and not the node
     def find_max
       max = nil
-      reutrn max if current = @head
+      return max if current = @head
 
       until current == nil
         current > max ? max = current : current = current.next
@@ -92,6 +92,7 @@ class LinkedList
     # Space Complexity: ?
     def get_at_index(index)
       current = @head
+
       return current if index == 0 
 
       count = index + 1
@@ -121,7 +122,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def delete(value)
-      raise NotImplementedError
+  
     end
 
     # method to reverse the singly linked list
@@ -129,7 +130,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      raise NotImplementedError
+    
     end
 
 
