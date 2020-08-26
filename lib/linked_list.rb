@@ -3,6 +3,8 @@
 class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
+  attr_accessor :prev # allow external entities to read or write next node
+
 
   def initialize(value, next_node = nil, prev_node = nil)
     @data = value
@@ -19,72 +21,96 @@ class LinkedList
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_first(value)
       if @head.nil?
-        @head = Node.new(value, @head)
+        @head = Node.new(value)
+      else 
+        current = @head
+        first = Node.new(value)
+        first.next = current
+        current.prev = first
+        @head = first
       end 
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(N)
+    # Space Complexity: O(1)
     def search(value)
-      count = 0
+      current = @head
       if @head.nil?
         return false
       else 
-      current = @head
         while current.next != nil
           if current.data == value
             return true
           else 
-          current = current.next
-          end
-        end
-      end
-      return false 
-    end
-
-    # method to return the max value in the linked list
-    # returns the data value and not the node
-    def find_max
-      max = -Infinity 
-      if @head.nil?
-        return null
-      elsif @head.next.nil?
-        return @head.next.data
-      else 
-        while current.next != nil
-          if current.data > max
-            max = current.data
             current = current.next
           end
         end
       end
+      if current.data == value
+        return true
+      else 
+        return false
+      end 
+      return false
+    end
+
+    # method to return the max value in the linked list
+    # returns the data value and not the node
+    # Time Complexity: O(N)
+    # Space Complexity: O(1)
+    def find_max
+      max = -1000000 
+      current = @head
+      if @head.nil?
+        return nil
+      elsif @head.next.nil?
+        return @head.data
+      else 
+        while current.next != nil
+          if current.data > max
+            max = current.data
+          end
+          current = current.next
+        end
+      end
+
+      if current.data > max
+        max = current.data
+      end
+
       return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(N)
+    # Space Complexity: O(1)
     def find_min
-      min = Infinity 
+      min = 1000000
+      current = @head 
       if @head.nil?
-        return null
+        return nil
       elsif @head.next.nil?
-        return @head.next.data
+        return @head.data
       else 
         while current.next != nil
           if current.data < min
             min = current.data
-            current = current.next
           end
+          current = current.next
         end 
       end 
+
+      if current.data < min
+        min = current.data
+      end
+
       return min
     end
 
@@ -97,7 +123,7 @@ class LinkedList
       current = @head
       if current.nil?
         return 0
-      elsif current.next.nil
+      elsif current.next.nil?
         return 1
       else 
         while current.next != nil
@@ -115,17 +141,24 @@ class LinkedList
     # Space Complexity: O(1)
     def get_at_index(index)
       count = 0 
-      if index == 0 
-        return @head.value
-      else
+      if index > self.length-1
+        return nil
+      end 
+
       current = @head
+      if index == 0 
+        return @head.data
+      else
         while current.next != nil
           current = current.next
-          count +=1
+          count += 1
           if count == index
-            return current.value
+            return current.data
           end
         end
+      end
+      if index == self.length-1
+        return current.data
       end
     end
 
@@ -145,34 +178,56 @@ class LinkedList
     # Time Complexity: O(N)
     # Space Complexity: O(1)
     def delete(value)
-      if @head.next.nil?
-        @head = nil 
-      elsif @head == value
-        @head.next.prev = nil
-        @head = @head.next
-      elsif value.next.nil?
-        value.next.prev = nil
-      else 
-        value.prev.next = value.next
-        value.next.prev = value.prev 
+      if @head.nil? 
+        return nil
       end 
+      current = @head 
+      while current != nil
+        if @head.next.nil? && @head.data == value
+          @head = nil 
+        elsif @head.next != nil && @head.data == value
+          @head = @head.next
+        elsif current.next != nil && current.prev != nil && current.data == value
+            prevn = current.prev
+            nextn = current.next
+            prevn.next = nextn
+            nextn.prev = prevn
+        elsif  !current.prev.nil? && current.data == value
+          current.prev.next = current.next 
+        end 
+        current = current.next
+      end
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(N)
+    # Space Complexity: O(1)
     def reverse
-      current = @head
-      current.prev = nil
-      current.next = nil
-  
-      while current != nil
-        temp = current.next
-        current.next = current.prev
-        current.prev = current
-        current = temp
+      if @head.nil? || @head.next.nil? 
+        return @head
       end
+      
+      current = @head
+
+      while current.next != nil
+        current = current.next
+      end 
+
+      # current = current.next
+      @head = current
+
+      while current != nil
+        prev = current.prev
+        current.prev = current.next
+        current.next = prev
+        current = prev
+      end
+
+      # if temp != nil
+      #   @head = temp.prev
+      # end 
+    return @head
     end
 
 
