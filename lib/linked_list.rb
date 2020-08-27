@@ -19,7 +19,7 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     # Time Complexity: O(1) => because we don't need to traverse 
-    # Space Complexity: => because we are not using any extra space
+    # Space Complexity: O(1) => because we are not using any extra space
     def add_first(value)
       if @head.nil?
         @head = Node.new(value)
