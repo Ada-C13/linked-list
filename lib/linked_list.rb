@@ -110,7 +110,12 @@ class LinkedList
   # Time Complexity: O(n)
   # Space Complexity: O(1)
   def get_at_index(index)
-    return get_node_at_index(index).data
+    node = get_node_at_index(index)
+    if node
+      return node.data
+    else
+      return nil
+    end
   end
   def get_node_at_index(index)
     length = self.length
