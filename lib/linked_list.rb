@@ -218,7 +218,11 @@ class LinkedList
   # Time Complexity: ?
   # Space Complexity: ?
   def get_first
-    raise NotImplementedError
+    if @head
+      return @head
+    else
+      return nil
+    end
   end
 
   # method that inserts a given value as a new last node in the linked list
