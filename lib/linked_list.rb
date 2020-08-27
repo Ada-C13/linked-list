@@ -39,17 +39,6 @@ class LinkedList
     end
     return search_help(value) != nil
   end
-  def search_help(value)
-    current = @head
-    while current != nil
-      if current.data == value
-        return current
-      else
-        current = current.next
-      end
-    end
-    return nil
-  end
 
   # method to return the max value in the linked list
   # returns the data value and not the node
@@ -116,20 +105,6 @@ class LinkedList
     else
       return nil
     end
-  end
-  def get_node_at_index(index)
-    length = self.length
-    if length < index
-      return nil
-    end
-    current = @head
-    (0..(length-1)).each do |i|
-      if i == index
-        return current
-      end
-      current = current.next
-    end
-    return nil
   end
 
   # method to print all the values in the linked list
@@ -267,4 +242,34 @@ class LinkedList
 
     current.next = @head # make the last node link to first node
   end
+
+  private
+
+  def get_node_at_index(index)
+    length = self.length
+    if length < index
+      return nil
+    end
+    current = @head
+    (0..(length-1)).each do |i|
+      if i == index
+        return current
+      end
+      current = current.next
+    end
+    return nil
+  end
+
+  def search_help(value)
+    current = @head
+    while current != nil
+      if current.data == value
+        return current
+      else
+        current = current.next
+      end
+    end
+    return nil
+  end
+
 end
