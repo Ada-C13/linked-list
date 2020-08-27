@@ -160,7 +160,9 @@ class LinkedList
       new_list.add_first(current)
       current = current.next
     end
-    self = new_list
+    @head.next = nil
+    @head.data = nil
+    @head = new_list
   end
 
 
