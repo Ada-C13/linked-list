@@ -13,7 +13,7 @@ end
 # Defines the singly linked list
 class LinkedList
   def initialize
-    @head = nil # keep the head private. Not accessible outside this class
+    @head = nil # keep the head private. Not accessible outside self class
   end
 
   # method to add a new node with the specific data value in the linked list
@@ -113,7 +113,7 @@ class LinkedList
     return get_node_at_index(index).data
   end
   def get_node_at_index(index)
-    length = this.length
+    length = self.length
     if length < index
       return nil
     end
@@ -144,7 +144,7 @@ class LinkedList
     target = search_help(value)
     after_target = target.next
     target.next = nil
-    before_target_index = this.length - 2
+    before_target_index = self.length - 2
     before_target = get_node_at_index(before_target_index)
     before_target.next = after_target
   end
@@ -160,7 +160,7 @@ class LinkedList
       new_list.add_first(current)
       current = current.next
     end
-    this = new_list
+    self = new_list
   end
 
 
@@ -169,7 +169,7 @@ class LinkedList
   # Time Complexity: O(n)
   # Space Complexity: O(1)
   def find_middle_value
-    length = this.length
+    length = self.length
     middle_index = length/2
     return get_at_index(middle_index)
   end
@@ -179,7 +179,7 @@ class LinkedList
   # Time Complexity: O(n)
   # Space Complexity: O(1)
   def find_nth_from_end(n)
-    length = this.length
+    length = self.length
     nth_from_end_index = length - 1 - n
     return get_at_index(nth_from_end_index)
   end
