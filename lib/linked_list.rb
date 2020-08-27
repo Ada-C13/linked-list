@@ -123,12 +123,13 @@ class LinkedList
       return nil
     end
     current = @head
-    (0..length-1).each do |i|
+    (0..(length-1)).each do |i|
       if i == index
         return current
       end
       current = current.next
     end
+    return nil
   end
 
   # method to print all the values in the linked list
