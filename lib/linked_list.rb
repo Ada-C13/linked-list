@@ -167,8 +167,7 @@ class LinkedList
       current = current.next
     end
     @head.next = nil
-    @head.data = nil
-    @head = new_list
+    @head = new_list.get_first
   end
 
 
