@@ -96,7 +96,7 @@ class LinkedList
       return 0
     end
     current = @head
-    length = 1
+    length = 0
     while current != nil
       length += 1
       current = current.next
