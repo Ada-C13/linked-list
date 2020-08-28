@@ -8,6 +8,7 @@ class Node
     @data = value
     @next = next_node
   end
+
 end
 
 # Defines the singly linked list
