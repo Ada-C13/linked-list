@@ -4,10 +4,11 @@ class Node
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :next # allow external entities to read or write next node
 
-  def initialize(value, next_node = nil)
+  def initialize(value)
     @data = value
     @next = next_node
   end
+
 end
 
 # Defines the singly linked list
@@ -18,71 +19,161 @@ class LinkedList
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_first(value)
-      raise NotImplementedError
-    end
+      if @head.nil?
+        @head = Node.new(value)
+      else 
+        new_nodelet = Node.new(value, @head)
+        new_nodelet.next = @head 
+        @head = new_nodelet 
+      end 
+    end 
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def search(value)
-      raise NotImplementedError
+      return false if @head.nil?
+
+      current = @head
+
+      while current != nil 
+        return true if value == current.data 
+        current = current.next
+      end 
+
+      return false 
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def find_max
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      highest_value = @head.data
+
+      until current.nil?
+        if current.data > highest_value
+          highest_value = current.data
+        end 
+        current = current.next
+      end 
+
+      return highest_value
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def find_min
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      lowest_value = @head.data
+      
+      until current.nil?
+        if current.data < lowest_value
+          lowest_value = current.data
+        end
+        current = current.next 
+      end
+
+      return lowest_value
     end
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def length
-      raise NotImplementedError
+      return 0 if @head.nil?
+
+      current = @head 
+      count = 0
+
+      while current != nil 
+        current = current.next
+        count += 1
+      end 
+
+      return count 
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def get_at_index(index)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      count = 0
+
+      until count == index
+        current = current.next
+        count += 1
+      end 
+
+      return current.data
     end
 
     # method to print all the values in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def visit
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head 
+
+      while current != nil
+        puts current.data 
+        current = current.next 
+      end 
     end
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def delete(value)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      last = @head
+      current = @head
+
+      until current.data == value || current.nil? 
+        last = current
+        current = current.next
+      end 
+      
+      last.next = current.next 
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
     def reverse
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      last = nil
+      current = @head
+
+      while current != nil
+        queued = current.next
+        current.next = last 
+        last = current
+        current = queued 
+      end 
+
+      @head = last 
     end
 
 
