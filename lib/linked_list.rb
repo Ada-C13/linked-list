@@ -145,23 +145,33 @@ class LinkedList
 
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: o(n)
+  # Space Complexity: O(n)
+  # def reverse
+  #   current = @head
+  #   while current != nil
+  #     temp = current.previous
+  #     current.previous = current.next
+  #     current.next = temp
+  #     current = current.previous
+  #   end
+  #   temp = @head
+  #   @head = @tail
+  #   @tail = temp
+  # end
+
   def reverse
-    # no need to reverse if head is nil
-    # or there is only 1 node.
-    return head if !head || !head.next
-    current_head = head.next
-    reversed_list = head
-    reversed_list.next = nil
-    while current_head
-      temp = current_head
-      current_head = current_head.next
-      temp.next = reversed_list
-      reversed_list = temp
+    current = @head
+    previous = nil
+    while current != nil
+      temp = current.next # save state
+      current.next = previous # update the link
+      previous =  current
+      current = temp
     end
-    reversed_list
+    @head = previous
   end
+
 
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
