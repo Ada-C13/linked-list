@@ -20,10 +20,15 @@ class LinkedList
     # insert the new node at the beginning of the linked list
     # Time Complexity: 0(1)
     # Space Complexity: 0(1)
-    def add_first(value)
-      @head = Node.new(value, @head)
-      return @head
-    end
+   
+      def add_first(value)
+        @head = Node.new(value, @head)
+        return @head
+      end
+      # new_node = Node.new(value)
+      # new_node.next = @head
+      # @head = new_node
+   
     
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
