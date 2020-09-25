@@ -29,7 +29,7 @@ class LinkedList
   # method to find if the linked list contains a node with specified value
   # returns true if found, false otherwise
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def search(value)
     current = @head
     while current != nil
@@ -59,7 +59,7 @@ class LinkedList
   # method to return the min value in the linked list
   # returns the data value and not the node
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def find_min
     return nil if !@head
     current = @head
@@ -75,7 +75,7 @@ class LinkedList
 
   # method that returns the length of the singly linked list
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def length
     counter = 0
     current = @head
@@ -90,7 +90,7 @@ class LinkedList
   # index count starts at 0
   # returns nil if there are fewer nodes in the linked list than the index value
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def get_at_index(index)
     i = 0
     current = @head
@@ -104,7 +104,7 @@ class LinkedList
 
   # method to print all the values in the linked list
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def visit
     current = @head
     while current != nil
@@ -135,7 +135,7 @@ class LinkedList
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def reverse
     prev = nil
     next_node = nil
@@ -153,7 +153,7 @@ class LinkedList
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def find_middle_value
     return nil if !@head
     slow = @head
@@ -168,7 +168,7 @@ class LinkedList
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   # Time Complexity: O(n)
-  # Space Complexity: O(n)
+  # Space Complexity: O(1)
   def find_nth_from_end(n)
     return nil if !@head
     current = @head
@@ -214,8 +214,8 @@ class LinkedList
   end
 
   # method that inserts a given value as a new last node in the linked list
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(1)
+  # Space Complexity: O(1)
   def add_last(value)
     new_node = Node.new(value)
     if !@head
@@ -231,8 +231,8 @@ class LinkedList
 
   # method that returns the value of the last node in the linked list
   # returns nil if the linked list is empty
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(1)
+  # Space Complexity: O(1)
   def get_last
     return nil if @head == nil
     current = @head
@@ -244,8 +244,8 @@ class LinkedList
 
   # method to insert a new node with specific data value, assuming the linked
   # list is sorted in ascending order
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(n)
+  # Space Complexity: O(1)
   def insert_ascending(value)
     new_node = Node.new(value)
     if @head == nil 
