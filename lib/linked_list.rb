@@ -21,46 +21,110 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_first(value)
-      raise NotImplementedError
+      new_node = Node.new(value)
+      if @head.nil?
+        @head = new_node
+        return @head
+      end
+
+      new_node.next = @head 
+      # conection between the new node and the next one that is the head.
+      @head = new_node # The new node becomes the head.
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def search(value)
-      raise NotImplementedError
+      return false if @head.nil?
+
+      pointer = @head
+      return true if pointer.data == value
+
+      while !pointer.next.nil?
+        pointer = pointer.next
+        return true if pointer.data == value
+      end
+
+      # while (pointer = pointer.next)
+      #   return true if pointer.data == value
+      # end
+      return false
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      pointer = @head
+
+      max = pointer.data
+
+      while !pointer.next.nil?
+        pointer = pointer.next
+        if pointer.data > max
+          max = pointer.data
+        end
+      end
+
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def find_min
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      pointer = @head
+      min = pointer.data
+
+      while !pointer.next.nil?
+        pointer = pointer.next
+        if pointer.data < min
+          min = pointer.data
+        end
+      end
+
+      return min
     end
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def length
-      raise NotImplementedError
+      return 0 if @head.nil?
+
+      count = 0 
+      current = @head
+      while !current.nil?
+        count += 1
+        current = current.next
+      end
+      return count
+
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def get_at_index(index)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      pointer = @head
+      count = 0
+      until pointer.next.nil? || count == index
+        pointer = pointer.next
+        count += 1
+      end
+
+      return pointer.data
     end
 
     # method to print all the values in the linked list
@@ -71,12 +135,32 @@ class LinkedList
     end
 
     # method to delete the first node found with specified value
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def delete(value)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      if @head.data == value
+        @head = @head.next
+        return
+      end
+
+      pointer = find_previous(value)
+      pointer.next = pointer.next.next
     end
 
+
+    def find_previous(value)
+      current = @head
+      return nil if !current.next
+
+      return current if current.next.data == value
+
+      while (current = current.next)
+        return current if current.next && current.next.data == value
+      end
+    end
+    
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     # Time Complexity: ?
@@ -115,25 +199,47 @@ class LinkedList
     # Additional Exercises 
     # returns the value in the first node
     # returns nil if the list is empty
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def get_first
-      raise NotImplementedError
+      return nil if @head.nil?
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def add_last(value)
-      raise NotImplementedError
+      new_node = Node.new(value)
+      # Using add_first function to add new node in case the list is empty.
+      if @head.nil?
+        add_first(new_node.data)
+        return
+      end
+
+      pointer = @head
+      # Until we reach the last node
+      until pointer.next.nil?
+        # Move the pointer to the next.
+        pointer = pointer.next
+      end
+
+      pointer.next = new_node
+      new_node.next = nil
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
-    # Time Complexity: ?
-    # Space Complexity: ?
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def get_last
-      raise NotImplementedError
+      return nil if @head.nil?
+      pointer = @head
+
+      until pointer.next.nil?
+        pointer = pointer.next
+      end
+      return pointer.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
