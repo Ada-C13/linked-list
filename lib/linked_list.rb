@@ -122,14 +122,28 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def visit
-      raise NotImplementedError
+      current = @head
+      while current !=nil
+        puts current.data
+        current = current.next
+        end
     end
 
     # method to delete the first node found with specified value
     # Time Complexity: ?
     # Space Complexity: ?
     def delete(value)
-      raise NotImplementedError
+      current = @head
+      return if current.nil?
+
+      while current != nil
+        if current.next.nil?
+
+        end
+        if current.next.value == value
+
+        end
+      end
     end
 
     # method to reverse the singly linked list
@@ -137,7 +151,7 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
-      raise NotImplementedError
+
     end
 
 
