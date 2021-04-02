@@ -133,16 +133,25 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def delete(value)
+
+      if @head.nil?
+        return
+      end
+
+      if @head.data == value
+        @head = @head.next
+        return
+      end
+
       current = @head
-      return if current.nil?
+      previous = nil
 
       while current != nil
-        if current.next.nil?
-
+        if current.data == value
+          previous.next = current.next
         end
-        if current.next.value == value
-
-        end
+        previous = current
+        current = current.next
       end
     end
 
