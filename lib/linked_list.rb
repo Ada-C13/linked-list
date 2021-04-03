@@ -21,12 +21,11 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def add_first(value)
-      # if the head is nil new_node becomes head
-      # Then head becomes the new node.
+
       new_node = Node.new(value, nil)
       new_node.next = @head
       @head = new_node
-      return @head.data;
+      return @head.data
     end
 
     # method to find if the linked list contains a node with specified value
@@ -160,7 +159,20 @@ class LinkedList
     # Time Complexity: ?
     # Space Complexity: ?
     def reverse
+      if @head.nil? || @head.next.nil?
+        return @head
+      end
 
+      current = @head
+      previous = nil
+
+      while current != nil
+        temp = current.next
+        current.next = previous
+        previous = current
+        current = temp
+      end
+      @head = previous
     end
 
 
