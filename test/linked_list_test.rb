@@ -63,14 +63,14 @@ describe LinkedList do
         end
 
         it "returns false if the element is not in the list" do
-          @list = LinkedList.new
-          @list.add_first(3)
-          @list.add_first(2)
-          expect(@list.search("pasta")).must_equal false
+            @list = LinkedList.new
+            @list.add_first(3)
+            @list.add_first(2)
+            expect(@list.search("pasta")).must_equal false
         end
 
         it "returns false for an empty list" do
-          expect(@list.search(3)).must_equal false
+            expect(@list.search(3)).must_equal false
         end
     end
 
@@ -90,7 +90,7 @@ describe LinkedList do
     end
 
     describe 'get_at_index' do
-        it 'returns nil if the index is outside the bounds of the list' do
+        it 'returns nil if the list is empty' do
             expect(@list.get_at_index(3)).must_be_nil
         end
 
@@ -105,9 +105,13 @@ describe LinkedList do
             expect(@list.get_at_index(2)).must_equal 2
             expect(@list.get_at_index(3)).must_equal 1
         end
+
+        it 'returns nil if the index is outside the bounds of the list' do
+            expect(@list.get_at_index(5)).must_be_nil
+        end
     end
 
-    xdescribe "Optional addLast & getLast" do
+    describe "Optional addLast & getLast" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_at_index(0)).must_equal 1
@@ -192,7 +196,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "Optional:  nth_from_the_end" do
+    describe "Optional: nth_from_the_end" do
         it 'returns nil if n is outside the bounds of the list' do
             expect(@list.find_nth_from_end(3)).must_be_nil
         end
