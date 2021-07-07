@@ -107,7 +107,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "Optional addLast & getLast" do
+    describe "Optional addLast & getLast" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_at_index(0)).must_equal 1
@@ -223,6 +223,18 @@ describe LinkedList do
             expect(@list.get_at_index(1)).must_equal 3
             expect(@list.get_at_index(2)).must_equal 2
             expect(@list.get_at_index(3)).must_equal 1
+        end
+    end
+    describe "visit" do
+        it "return nil for empty linked list" do
+            expect(@list.visit).must_equal nil
+        end
+        it "return an array of values from the linked list" do
+            @list.add_first(4)
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+            expect(@list.visit).must_equal [1, 2, 3, 4]
         end
     end
 end
